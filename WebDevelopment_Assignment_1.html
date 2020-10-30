@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color:white;
+            color:black;
+            font-size: 25px;
+        }
+        h1{
+            text-align: center;
+            text-decoration: underline;
+            color:aqua;
+        }
+        .button
+        {
+            font-size: 20px;
+        }
+        input{
+            padding: 12px 20px;
+        }
+        .answer{
+            color:blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Web Development Assignment 1</h1>
+    Q.1. Write conditional statement to sort three numbers<br/>
+    Enter first number: <input type="text" id="num1"><br/>
+    Enter Second Number: <input type="text" id="num2"><br/>
+    Enter third number: <input type="text" id="num3"><br/>
+    <input type="button" name="b1" class="button" value="Click here for answer" onclick="SortingNumber()"><br/>
+    Numbers are: <strong class="answer" id="beforeSort"></strong><br/>
+    The sorted numbers are: <strong class="answer" id="afterSort"></strong>
+    <br/><br/>
+    Q.2. Write a JavaScript for a loop that will iterate from n times. For each iteration,
+    it will check if the current number is odd, even, or prime and display a message on screen
+    <br/>
+    Enter a number: <input type="text" id="CheckOddEvenPrime"><br/>
+    <input type="button" class="button" name="btnCheckOddEvenPrime" value="Click here for output" onclick="CheckOddEvenPrime()">
+    <br/>
+    Answer: <ul class="answer" id="AnswerCheckOddEvenPrime"></ul>
+    <br/>
+    Q.3. Write JavaScript Program to write following pattern.
+    <br/>
+    <input type="button" name="btnStarSeries" class="button" onclick="PrintStarSeries()" value="Click here to view * pattern "><br/>
+    Answer:<p class="answer" id="AnswerStarSeries"></p>
+    <br/>
+    Q.4. Write JavaScript function to hide email address to protect from unauthorised user
+    <br/>
+    Enter your email address: <input type="text" id="txthideEmail"><br/>
+    <input type="button" name="btnhideEmail" class="button" onclick="hideEmail()" value="Submit"><br/>
+    Email address = <strong class="answer" id="hideEmail"></strong>
+    <br/><br/>
+    Q.5. Write a JavaScript function to capitalize the first word in a string.<br/>
+    Enter the string: <input type="text" id="txtCapitalizeFirstLetter"><br/>
+    <input type="button" name="btnCapitalize" class="button" onclick="capitalizeFirstLetterofWord()" value="Submit "><br/>
+    Original string is: <strong class="answer" id="lblOrginalString"></strong><br/>
+    Answer: String with first word capitalized is : <strong class="answer" id="lblCapitalizeString"></strong>
+    <br/><br/>
+    Q. 6. Write a JavaScript function to truncate a string to a certain number of words.<br/>
+    Enter the string: <input type="text" id="txtTruncateWord"><br/>
+    Enter a number to truncate: <input type="text" id=txtTruncTillNum><br/>
+    <input type="button" name="btnTrucateWord" class="button" onclick="TruncateString()" value="Submit"><br/>
+    Original string: <strong class="answer" id="lblOrginalstr"></strong><br/>
+    Answer: String after truncate: <strong class="answer" id="lblTruncateStr"></strong>
+    <br/><br/>
+    Q. 7. Write a JavaScript function to find a word within a string.<br/>
+    String:“It was the best of times, it was the worst of times, it was the age of wisdom,<br/>
+     it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, <br/>
+     it was the season of Light, it was the season of Darkness, it was the spring of hope,<br/>
+      it was the winter of despair.”<br/>
+    Enter the word: <input type="text" id="txtFindWord"><br/>
+    <input type="button" name="btnFindWords" class="button" onclick="FindWordCount()" value="Submit"><br/>
+    Answer: <strong id="lblFindWordCount" class="answer"></strong>
+    <br/><br/>
+    Q.8. Write a JavaScript Program to print Fibonacci series of n times.<br/>
+    Enter value of "n" : <input type="text" id="txtFibonacci"><br/>
+    <input type="button" name="btnFibonacci" class="button" onclick="getFibonacci()" value="Submit "><br/>
+    Answer: Fibonacci series: <p id="lblFibonacci" class="answer"></p>
+    <br/>
+    Q.9. The temperature converter.<br/>
+    Create a function to create celsius to Fahrenhite:<br/>
+    Enter temperature in degree celsius: <input type="text" id="txtTempConvert"><br/>
+    <input type="button" name="b9" class="button" onclick="TempertureConverter()" value="Convert to Fahrenhite"><br/>
+    Temperature in degree celsius: <strong id="lblOrgTemp" class="answer"> </strong><sup>o</sup>C<br/>
+    Answer: Temperature in degree Fahrenhite = <strong id="lblTemp" class="answer"></strong><sup>o</sup>F
+    <br/><br/>
+    Q.10. Write a JavaScript function that takes a string which has lower and upper case letters<br/>
+    as a parameter and converts upper case letters to lower case and lower case letters<br/>
+    to upper case<br/>
+    Enter text here: <input type="text" id="txtChangeCase"><br/>
+    <input type="button" name="btnChangeCase" class="button" onclick="StrinTo_up_low()" value="Click here to change the case of string  "><br/>
+    Answer: <strong id="lblChangeCase" class="answer"></strong><br/>
+
+
+
+
+<script type="text/javascript">
+function SortingNumber()
+{
+    var num1=parseInt(document.getElementById("num1").value);
+    var num2=parseInt(document.getElementById("num2").value);
+    var num3=parseInt(document.getElementById("num3").value);
+    
+    var noBforeSroting= [num1,num2,num3];
+    var noAfterSroting = noBforeSroting
+    
+    document.getElementById("beforeSort").innerHTML=noBforeSroting;
+    alert("Original numbers are:"+noBforeSroting +'\n' +
+         "Numbers after Sorting are:"+ noAfterSroting.sort(function(n, k){return n - k}));   
+    document.getElementById("afterSort").innerHTML=noAfterSroting;
+
+}
+
+function CheckOddEvenPrime()
+{
+    document.getElementById("AnswerCheckOddEvenPrime").innerHTML="";
+    var count=parseInt(document.getElementById("CheckOddEvenPrime").value);
+    
+    var num=1;
+    var Htmlstr='<u1>'
+    var numArray=new Array()
+    
+    for (j = 0; j < count; j++) 
+    {
+        var str = ''
+        if(j%2==0)
+        {
+            str =  num+" is an even number";            
+        }
+        else
+        {
+            str =num+" is an odd number";
+        }
+        // if (num % i == 0) {
+        //     isPrime = false;
+        //     break;
+        // }
+        numArray[j]= str
+        num++;
+    }
+    for (i = 0; i < numArray.length; i++) 
+    {
+        var li = document.createElement("li");
+        var Htmltext = document.createTextNode(numArray[i]);
+        li.appendChild(Htmltext);
+        document.getElementById("AnswerCheckOddEvenPrime").appendChild(li);
+    }
+
+}
+
+function PrintStarSeries()
+{
+    document.getElementById("AnswerStarSeries").innerHTML="";
+    for (var n= 5; n >= 1; n--) 
+    {
+        var result = "";
+        
+        for (var k = n; k >= 1; k--)
+        {
+           
+            result += "*";
+            
+        }
+        
+        document.getElementById("AnswerStarSeries").innerHTML+=('<br/>'+result);
+    }
+    
+}
+
+function hideEmail ()
+{
+    var emailID=document.getElementById("txthideEmail").value;
+    var avg, split_emailid, Split1, Split2;
+    split_emailid = emailID.split("@");
+    Split1 = split_emailid[0];
+    avg = Split1.length / 2;
+    Split1 = Split1.substring(0, (Split1.length - avg));
+    Split2 = split_emailid[1];
+    document.getElementById("hideEmail").innerHTML=( Split1 + "...@" + Split2);
+};
+
+function capitalizeFirstLetterofWord() 
+{ 
+    var strToCapitalize = document.getElementById("txtCapitalizeFirstLetter").value;
+    document.getElementById("lblOrginalString").innerHTML=strToCapitalize; 
+    var resStr = document.getElementById("lblCapitalizeString");  
+    var splitString = strToCapitalize.toLowerCase().split(' ');
+    for (var i = 0; i < splitString.length; i++) 
+    {
+        splitString[i] = splitString[i].charAt(0).toUpperCase() + splitString[i].substring(1);     
+    }
+   
+    resStr.innerHTML= splitString.join(' ');
+} 
+
+function TruncateString()
+{
+    var strtoTruncate=document.getElementById("txtTruncateWord").value;
+    var num=parseInt(document.getElementById("txtTruncTillNum").value);
+    
+    document.getElementById("lblOrginalstr").innerHTML=strtoTruncate;
+    document.getElementById("lblTruncateStr").innerHTML=strtoTruncate.split(" ").splice(0,num).join(" ");
+}
+
+function FindWordCount()
+{
+    var str="It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness,"
+            + "it was the epoch of belief,it was the epoch of incredulity, it was the season of Light,"
+            +" it was the season of Darkness,it was the spring of hope, it was the winter of despair.";
+    
+    var Findword=document.getElementById("txtFindWord").value;
+    document.getElementById("lblFindWordCount").innerHTML=str;
+    var count = 0, num=0;
+   
+    for (i=0;i< str.length;i++)
+        {
+        if(str[i] == Findword[0])
+            {
+            for(j=i;j< i+Findword.length;j++)
+               {
+                if(str[j]==Findword[j-i])
+                  {
+                    num++;
+                  }
+                if (num==Findword.length){
+                    count++;
+                }
+            }
+            num=0;
+        }
+    }
+    document.getElementById("lblFindWordCount").innerHTML="'"+Findword+"' was found "+count+" times.";
+}
+
+
+function getFibonacci()
+{
+    document.getElementById("lblFibonacci").innerHTML="";
+    var number = parseInt(document.getElementById("txtFibonacci").value);
+    
+    var num1 = 0, num2 = 1, s;
+
+    for ( i = 1; i <= number; i++)
+    {
+        document.getElementById("lblFibonacci").innerHTML+=num1+'<br/>';
+        s = num1 + num2;
+        num1 = num2;
+        num2 = s;
+    }
+}
+
+function TempertureConverter()
+{
+    var temp_cel=parseInt(document.getElementById("txtTempConvert").value);
+    
+    document.getElementById("lblOrgTemp").innerHTML=temp_cel;
+    var temp_far= temp_cel* 9 / 5 + 32;
+    document.getElementById("lblTemp").innerHTML=temp_far;
+}
+
+function StrinTo_up_low(){
+    var str= document.getElementById("txtChangeCase").value;
+    var aftrConvert= str.replace(/([a-z]+)|([A-Z]+)/g, function(match, chr) {
+            return chr ? match.toUpperCase() : match.toLowerCase();
+        })
+        document.getElementById("lblChangeCase").innerHTML=aftrConvert;
+        }
+</script>
+
+</body>
+</html>
