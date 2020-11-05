@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>JS Assingment 2</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="Assignmemt2Style.css">
+</head>
+
+<body>
+    <div >
+        <div class="row">
+        
+    
+        <div class="col-lg-3 col-md-3 col-sm-3" style="background-color: rgb(70, 52, 52);height:100vh;">
+           <ul>
+            <li ><a href="#" id="Q1" onclick="SetDivHTML('Q1')">Digital Clock</a></li>
+            <li ><a href="#" id="Q2" onclick="SetDivHTML('Q2')">Array to String</a></li>
+            <li ><a href="#" id="Q3" onclick="SetDivHTML('Q3')">Sort an Array</a></li>
+            <li ><a href="#" id="Q4" onclick="SetDivHTML('Q4')">Most frequent item in Array</a></li>
+            <li ><a href="#" id="Q5" onclick="SetDivHTML('Q5')">Add items in Array</a></li>
+            <li ><a href="#" id="Q6" onclick="SetDivHTML('Q6')">Remove Duplicate from Array</a></li>
+            <li ><a href="#" id="Q7" onclick="SetDivHTML('Q7')">Remove Duplicate from Dropdown</a></li>
+           </ul>
+
+            
+        </div>
+        <div id="displayAnsDiv" class="col-lg-9 col-md-9 col-sm-9" ">
+            <div class="col-lg-12 col-md-12 col-sm-12" id="titleID"></div>
+            <br/><br/><br/>
+            <div id="AnsDiv" style="color: white;">
+                
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script type="text/javascript">
+
+function SetDigitalClock(Timeformat)
+{
+    // debugger
+ document.getElementById("set12hClock").innerHTML='';
+ document.getElementById("set12hClock").removeAttribute("class");
+ document.getElementById("set12hClock").style.setProperty("display","none");
+ document.getElementById("set24hClock").innerHTML='';
+ document.getElementById("set24hClock").removeAttribute("class");
+ document.getElementById("set24hClock").style.setProperty("display","none");
+    if(Timeformat=="Q1")
+    {
+        document.getElementById("set12hClock").setAttribute("class","clock");
+        // document.getElementById("A1").style.removeProperty("display");
+        document.getElementById("set12hClock").style.removeProperty("display","none");
+    }
+    else if(Timeformat=="12hclock")
+    {
+        document.getElementById("set12hClock").setAttribute("class","clock");
+        document.getElementById("set12hClock").style.removeProperty("display","none");
+    }
+    else
+    {
+        document.getElementById("set24hClock").setAttribute("class","clock");
+        document.getElementById("set24hClock").style.removeProperty("display","none");
+    }
+    
+   // debugger
+ 
+  
+
+   document.getElementById("titleID").innerHTML="";
+  document.getElementById("titleID").innerHTML = "Digital Clock";
+    if(Timeformat != "24hclock")
+  {
+    Clock12H();
+  }
+  else
+  {
+    Clock24H();
+  }
+  
+}
+function Clock12H() {
+  var date = new Date(); /* creating object of Date class */
+  var hour = date.getHours();
+  var min = date.getMinutes();
+  var sec = date.getSeconds();
+  var ampm ='';
+  ampm = hour >= 12 ? 'PM' : 'AM';
+  hour = hour % 12;
+  hour = hour ? hour : 12; 
+  hour = updateTime(hour);
+  min = updateTime(min);
+  sec = updateTime(sec);
+  
+  
+//   document.getElementById("setAns").innerText='';
+  document.getElementById("set12hClock").innerText = hour + " : " + min + " : " + sec + ' '+ampm; /* adding time to the div */
+    var t = setTimeout(function(){ Clock12H() }, 1000); /* setting timer */
+}
+
+function Clock24H() {
+    var date = new Date(); /* creating object of Date class */
+  var hour = date.getHours();
+  var min = date.getMinutes();
+  var sec = date.getSeconds();
+   /*var ampm ='';
+ ampm = hour >= 12 ? 'PM' : 'AM';*/ 
+  hour = updateTime(hour);
+  min = updateTime(min);
+  sec = updateTime(sec);
+  
+  
+//   document.getElementById("setAns").innerText='';
+  document.getElementById("set24hClock").innerText = hour + " : " + min + " : " + sec ; /* adding time to the div */
+    var t = setTimeout(function(){ Clock24H() }, 1000); /* setting timer */
+}
+function updateTime(k) {
+  if (k < 10) {
+    return "0" + k;
+  }
+  else {
+    return k;
+  }
+}
+
+function SetDivHTML(IDs){
+    document.getElementById("AnsDiv").innerHTML="";
+    // debugger
+    if(IDs=="Q1")
+    {
+        var strhtml= "<div id='set12hClock'></div>"+
+                    " <div id='set24hClock'></div>"+
+                    " <div id='btnclock' style='text-align: center;' > "+
+                    " <button type='button' class='btn btn-primary' id='12hclock' onclick='SetDigitalClock(this.id)'>12H</button>"+
+                    " &nbsp;&nbsp;&nbsp;&nbsp;"+
+                    " <button type='button' class='btn btn-primary' id='24hclock' onclick='SetDigitalClock(this.id)'>24H </button>"+
+                    " </div>";
+        document.getElementById("AnsDiv").innerHTML=strhtml;
+
+        SetDigitalClock(IDs);
+    }
+    if(IDs=="Q2")
+    {
+        ConvertArrayToString();
+    }
+    if(IDs=="Q3")
+    {
+        DisplaySort();
+    }
+    if(IDs=="Q4")
+    {
+        DisplayFreq();
+    }
+    if(IDs=="Q5")
+    {
+        DisplayAddItemInAaray();
+    }
+    if(IDs=="Q6")
+    {
+        DisplayDuplicate();
+    }
+    if(IDs=="Q7")
+    {
+        DisplayDropdownAndRemoveItem();
+    }
+    
+    
+    
+}
+
+function ConvertArrayToString()
+{
+    // document.getElementById("AnsDiv").innerHTML.setAttribute("class","ans");
+    document.getElementById("titleID").innerHTML="";
+    document.getElementById("titleID").innerHTML = "Write a simple JavaScript program to join all elements of the following array into"+
+    " a string.<br/> carArray = ['Aston Martin', 'Audi', 'BMW', 'Datsun','Ferrari','Ford']";
+  var carArray = ["Aston Martin", "Audi", "BMW", "Datsun","Ferrari","Ford"];
+  var x = carArray.toString();
+ var y = ""
+ for(var i =0;i<carArray.length;i++)
+ {
+     if(i==0)
+     {
+        y= carArray[i];
+     }
+     else
+     {
+        y= y + "+"+ carArray[i];
+     }
+    
+ }
+  document.getElementById("AnsDiv").innerHTML = "After Converting Array to String : <br/> "+
+    " Output Type1 : " +x + "<br/>"+
+    " Output Type2 : " +y ;
+    
+}
+
+function DisplaySort(){
+    document.getElementById("titleID").innerHTML="";
+    document.getElementById("titleID").innerHTML ="Write a JavaScript program to sort the items of an array.<br/>"+
+    " numArray = [ 13, 15, 7, 9, 4, -4, 3, -2, 1 ,55,32];";
+    document.getElementById("AnsDiv").innerHTML ="";
+    document.getElementById("AnsDiv").innerHTML ="Befor Sorting : 13, 15, 7, 9, 4, -4, 3, -2, 1 ,55,32 "+
+    " &nbsp;&nbsp;&nbsp;&nbsp;<button type='button' class='btn btn-primary' onclick='SortingNumber()'>Sort Array</button> <br/>";
+}
+function SortingNumber()
+{
+    var numArray = [ 13, 15, 7, 9, 4, -4, 3, -2, 1 ,55,32]; 
+      var str ="After Sorting : "+ numArray.sort(function(n, k){return n - k});              
+    var textnode = document.createTextNode(str);
+   
+document.getElementById("AnsDiv").appendChild(textnode);  
+}
+function DisplayFreq(){
+    document.getElementById("titleID").innerHTML="";
+    document.getElementById("titleID").innerHTML ="Write a JavaScript program to find the most frequent item of an array.<br/>"+
+    " charArray=[4, 'a', 'b', 'c', 12, 4, 'c', 4, 'c', 1, 4, 1, 4];";
+    document.getElementById("AnsDiv").innerHTML ="<button type='button' class='btn btn-primary' onclick='MostFreqItemInArray()'>Find Most Frequent</button> <br/>";
+}
+function MostFreqItemInArray()
+{
+var charArray=[4, 'a', 'b', 'c', 12, 4, 'c', 4, 'c', 1, 4, 1, 4];
+var cmpr = 1;
+var lp = 0;
+var item;
+for (var i=0; i<charArray.length; i++)
+{
+        for (var j=i; j<charArray.length; j++)
+        {
+                if (charArray[i] == charArray[j])
+                lp++;
+                if (cmpr<lp)
+                {
+                    cmpr=lp; 
+                  item = charArray[i];
+                }
+        }
+        lp=0;
+}
+var str =item+" ( " +cmpr +" times ) ";
+    var textnode = document.createTextNode(str);
+    document.getElementById("AnsDiv").appendChild(textnode); 
+}
+
+var x = 0;
+var array = Array();
+function DisplayAddItemInAaray()
+{
+    var x = 0;
+    array = Array();
+    var str="<input type='text' id='text1'></input> &nbsp;&nbsp;&nbsp;"+
+"<input type='button' id='button1'  class='btn btn-primary'  value='Add' onclick='AddItemInarray();'></input> &nbsp;&nbsp;&nbsp;"+
+"<input type='button' id='button2'  class='btn btn-primary'  value='Display' onclick='DisplayArray();'></input>"+
+"<div id='Result'></div>";
+document.getElementById("titleID").innerHTML="";
+    document.getElementById("titleID").innerHTML ="Write a JavaScript program to add items in an blank array and display the items.<br/>";
+    
+    document.getElementById("AnsDiv").innerHTML =str;
+
+}
+
+
+function AddItemInarray()
+{
+    if(document.getElementById("text1").value == "")
+    {
+        alert("Please Enter any value in textbox.");
+        document.getElementById("text1").value = "";
+    return;
+    }
+    else{
+ array[x] = document.getElementById("text1").value;
+ alert("Element: " + array[x] + " Added at index " + x);
+ x++;}
+ document.getElementById("text1").value = "";
+
+}
+
+function DisplayArray()
+{
+   var e = "<hr/>";   
+    
+   for (var y=0; y<array.length; y++)
+   {
+     e += "Element " + y + " = " + array[y] + "<br/>";
+   }
+   document.getElementById("Result").innerHTML = e;
+}
+function DisplayDuplicate(){
+    document.getElementById("titleID").innerHTML="";
+    document.getElementById("titleID").innerHTML ="Write a JavaScript program to remove duplicate items from an array (ignore case sensitivity)<br/>"+
+    " num = [2, 13, 2, 15, 15, 4, 2, 8, 8, 9, 13];";
+    document.getElementById("AnsDiv").innerHTML ="<button type='button' class='btn btn-primary' onclick='RemoveDuplicatesFromArray()'>Remove Duplicates</button> <br/>";
+}
+function RemoveDuplicatesFromArray() {
+    var num = [2, 13, 2, 15, 15, 4, 2, 8, 8, 9, 13];
+  var i,
+      Arrlen=num.length,
+      ArrayItems=[],
+      dup={};
+ 
+  for (i=0; i<Arrlen; i++) {
+    dup[num[i]]=0;
+  }
+  for (i in dup) {
+    ArrayItems.push(i);
+  }
+  
+    var textnode = document.createTextNode(ArrayItems);
+    document.getElementById("AnsDiv").appendChild(textnode); 
+}
+
+function DisplayDropdownAndRemoveItem()
+{
+    var str="<select id='selectCountry'>"+
+        "<option selected='selected'>Australia</option>"+
+        "<option>Canada</option>"+
+        "<option>Germany</option>"+
+        "<option>India</option>"+
+        "<option>Japan</option>"+
+        "<option>Sweden</option>"+
+        "<option>Switzerland</option>"+
+        "<option>United Kingdom</option>"+
+        "<option>United States</option></select>"+
+        "&nbsp;&nbsp;&nbsp;&nbsp;"+
+
+        "<input type='button' class='btn btn-primary' onclick='removecountry()'' value='Select and Remove'>";
+
+        document.getElementById("titleID").innerHTML="";
+    document.getElementById("titleID").innerHTML ="Write a JavaScript program to remove items from a dropdown list.<br/>";
+    document.getElementById("AnsDiv").innerHTML =str;
+
+
+}
+function removecountry()
+{
+var item=document.getElementById("selectCountry");
+item.remove(item.selectedIndex);
+}
+</script>
+</html>
