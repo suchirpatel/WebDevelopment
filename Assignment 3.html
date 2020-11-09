@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>JS Assingment 3</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body id="tgBody" style="color: white;">
+    <div >
+        <div class="row">
+        
+    
+        <div class="col-lg-3 col-md-3 col-sm-3" style="background-color: rgb(70, 52, 52);height:100vh;">
+           <ul>
+            <li ><a href="#" id="Q1" onclick="SetDivHTML('Q1')">Credit Card Validation</a></li>
+            <li ><a href="#" id="Q2" onclick="SetDivHTML('Q2')">Difference between two dates in days</a></li>
+            <li ><a href="#" id="Q3" onclick="SetDivHTML('Q3')">Get width and height of the window</a></li>
+            <li ><a href="#" id="Q4" onclick="SetDivHTML('Q4')">Armstrong numbers of 3 digits</a></li>
+            <li ><a href="#" id="Q5" onclick="SetDivHTML('Q5')">LCM of two numbers</a></li>
+           </ul>
+
+            
+        </div>
+        <div id="displayAnsDiv" class="col-lg-9 col-md-9 col-sm-9" style="background-color: black;height: 100vh;">
+            <div class="col-lg-12 col-md-12 col-sm-12" id="titleID" style="color: white;font-size: 24px;text-align: left;"></div>
+            <br/><br/><br/>
+            <div id="AnsDiv" style="color: white;">
+                
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script type="text/javascript">
+
+function CreditCardValidation(Num){
+// number must be 16 digits
+if(Num.length !== 16){
+  return false;
+}
+
+// it must be numbers
+for(var i = 0; i < Num.length; i++){
+  var x = Num[i];
+  x = Number.parseInt(x);
+  if(!Number.isInteger(x)){
+    return false;
+  }
+}
+
+// num must have at least two different digits
+var chk = {};
+for(var i = 0; i < Num.length; i++){
+  chk[Num[i]] = true;
+}
+if(Object.keys(chk).length < 2){
+  return false;
+}
+
+// final digit must be even
+if(Num[Num.length - 1] % 2 !== 0){
+  return false;
+}
+
+// sum of all the digits > 16
+var sumOfNum = 0;
+for(var i = 0; i < Num.length; i++){
+  sumOfNum += Number(Num[i]);
+}
+if(sumOfNum <= 16){
+  return false;
+}
+
+return true;
+};
+
+function DateDiff(firstDate, SecondDate) {
+dt1 = new Date(firstDate);
+dt2 = new Date(SecondDate);
+return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
+}
+
+function GetWindowSize()
+{
+var width = document.documentElement.clientWidth;
+var height = document.documentElement.clientHeight;
+        
+ document.getElementById('AnsDiv').innerHTML = "<h1>Width: " + width + " and Height: " + height + "</h1>";
+}
+
+function SetDivHTML(IDs){
+
+// Remove the event handler from body tag
+document.getElementById("tgBody").setAttribute("onload","");
+document.getElementById("tgBody").setAttribute("onresize","");
+
+  document.getElementById("titleID").innerHTML="";
+    document.getElementById("AnsDiv").innerHTML="";
+    // debugger
+    if(IDs=="Q1")
+    {
+      
+    document.getElementById("titleID").innerHTML = "Credit Card Validation. <br/>"+
+    "To run the function, open your developer console and call the fucntion CreditCardValidation() and pass the Credit Card number to it.<br/>"+
+    "For E.g. CreditCardValidation('6666666666661666')"
+    }
+    if(IDs=="Q2")
+    {
+      document.getElementById("titleID").innerHTML = "Write a JavaScript function to get the difference between two dates in days.<br/>"+
+      "To run the function, open your developer console and call the fucntion DateDiff() and pass the two different date in dd-MMM-yyyy format.<br/>"+
+      "For E.g. DateDiff('30-OCT-2020','01-NOV-2020')"
+
+    }
+    if(IDs=="Q3")
+    {
+        // Attach an event handler to body tag
+        document.getElementById("tgBody").setAttribute("onload","GetWindowSize()");
+        document.getElementById("tgBody").setAttribute("onresize","GetWindowSize()");
+
+      document.getElementById("titleID").innerHTML="Write a JavaScript program to get the width and height of the window (any time the window is resized)."
+
+        GetWindowSize();
+    }
+    if(IDs=="Q4")
+    {
+      document.getElementById("titleID").innerHTML= "Write a JavaScript program to find the Armstrong numbers of 3 digits."
+      document.getElementById('AnsDiv').innerHTML = "<label for='lblNo'>Enter 3 digits number:</label>"+
+            " <input type='text' class='form-control' style='width:30%' id='txtArmstrongNo' name='txtArmstrongNo'> <br/><br/>"+
+            " <input type='button' class='btn btn-primary' value='check' onClick='fn_Armstrong()'><br/><br/>  "+
+            " <label for='lblRes' id='lblresult'></label>";
+    }
+    if(IDs=="Q5")
+    {
+       document.getElementById("titleID").innerHTML="Write a JavaScript function to get the least common multiple (LCM) of two numbers <br/>"+
+      " To run the function, open your developer console and call the fucntion lcm(num1,num2) and pass the two numbers<br/>"+
+      " For E.g. lcm(10,15)";
+    }
+}
+
+function fn_Armstrong()
+{
+  document.getElementById("lblresult").innerHTML="";
+    var num=document.getElementById("txtArmstrongNo").value;
+    if(num==''|| num.length!=3)
+    {
+      document.getElementById("txtArmstrongNo").value ="";
+      alert("Please Enter 3 digits number.")
+      return;
+    }
+    else{
+      try {
+        parseInt(num);
+      } catch (error) {
+        document.getElementById("txtArmstrongNo").value ="";
+        alert("Please Enter 3 digits number.")
+        return;
+      }
+     
+    } 
+    let sum = 0;
+  const number = parseInt(num);
+let temp = number;
+while (temp > 0) {
+    
+    let remainder = temp % 10;
+
+    sum += remainder * remainder * remainder;
+    temp = parseInt(temp / 10);
+}
+var str =""
+if (sum == number) {
+ str =number +" is an Armstrong number. ";    
+}
+else {
+  str = number +" is not an Armstrong number. ";
+}
+    document.getElementById("lblresult").innerHTML=str;
+}
+
+function lcm(num1, num2) {
+   if ((typeof num1 !== 'number') || (typeof num2 !== 'number')) 
+    return false;
+  return (!num1 || !num2) ? 0 : Math.abs((num1 * num2) / gcd(num1, num2));
+}
+function gcd(num1, num2) {
+  num1 = Math.abs(num1);
+  num2 = Math.abs(num2);
+  while(num2) {
+    var t = num2;
+    num2 = num1 % num2;
+    num1 = t;
+  }
+  return num1;
+}
+
+</script>
+</html>
