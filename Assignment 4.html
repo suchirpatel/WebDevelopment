@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>JS Assignment 4</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body id="tgBody" style="color: white;">
+    <div >
+        <div class="row">
+        
+    
+        <div class="col-lg-3 col-md-3 col-sm-3" style="background-color: rgb(70, 52, 52);height:100vh;">
+           <ul>
+            <li ><a href="#" id="Q1" onclick="SetDivHTML('Q1')">Calculate user's age with validation</a></li>
+            <li ><a href="#" id="Q2" onclick="SetDivHTML('Q2')">Merge sort program</a></li>
+            <li ><a href="#" id="Q3" onclick="SetDivHTML('Q3')">Compute the greatest common divisor</a></li>
+            <li ><a href="#" id="Q4" onclick="SetDivHTML('Q4')">Get the last element of an array</a></li>
+            <li ><a href="#" id="Q5" onclick="SetDivHTML('Q5')">Remove duplicate items from an array</a></li>
+           </ul>
+
+            
+        </div>
+        <div id="displayAnsDiv" class="col-lg-9 col-md-9 col-sm-9" style="background-color: black;height: 100vh;">
+            <div class="col-lg-12 col-md-12 col-sm-12" id="titleID" style="color: white;font-size: 24px;text-align: left;"></div>
+            <br/><br/><br/>
+            <div id="AnsDiv" style="color: white;">
+                
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script type="text/javascript">
+
+function SetDivHTML(IDs){
+
+
+  document.getElementById("titleID").innerHTML="";
+    document.getElementById("AnsDiv").innerHTML="";
+    // debugger
+    if(IDs=="Q1")
+    {
+      
+    document.getElementById("titleID").innerHTML = "Javascript to calculate user's age, based on DOB, check age eligibility,"+
+                                                  " & provide validation alert."+
+                                                  "<br/>"+
+                                                  "Below form Provides validation on Text change event as well as on 'Check Eligibility' button click.";
+
+    document.getElementById('AnsDiv').innerHTML = "<label for='lblNo'>Enter Date of Birth:</label>"+
+            " <input type='text' class='form-control' style='width:30%' id='txtDOB' name='txtDOB' onChange='getAgeFromDob()' placeholder='dd/MM/yyyy'> <br/><br/>"+
+            " <input type='button' class='btn btn-primary' value='Check Eligibility' onClick='getAgeFromDob()'><br/><br/>  ";
+            
+    }
+    if(IDs=="Q2")
+    {
+      document.getElementById("titleID").innerHTML = "Write a merge sort program in JavaScript."+
+      " To run the program ,Open the developer console in your browser and type mergeSort(array) and pass the unsorted array. For e.g mergeSort([34,7,23,32,5,62])"
+      
+    }
+    if(IDs=="Q3")
+    {
+      
+      document.getElementById("titleID").innerHTML="Write a JavaScript program to compute the greatest common divisor (GCD) of two positive integers."+
+          " <br/><br/><label for='lblNo1'>Enter Fisrt Number:</label>"+
+            " <input type='text' class='form-control' style='width:30%' id='txtNum1' name='txtNum1'> <br/>"+
+            " <label for='lblNo2'>Enter Second Number:</label>"+
+            " <input type='text' class='form-control' style='width:30%' id='txtNum2' name='txtNum2'> <br/><br/>"+
+            " <input type='button' class='btn btn-primary' value='Compute GCD' onClick='gcd()'><br/>";
+    }
+    if(IDs=="Q4")
+    {
+      document.getElementById("titleID").innerHTML= "Write a JavaScript function to get the last element of an array.<br/>"+
+            " Passing a parameter 'n' will return the last 'n' elements of the array.<br/>"+
+            " To run the function,open your developer console to call the function GetNelementfromArray(array,n). for E.g. console.log(GetNelementfromArray([7, 9, 0, -2],3));"
+     
+    }
+    if(IDs=="Q5")
+    {
+       document.getElementById("titleID").innerHTML="Write a JavaScript program to remove duplicate items from an array (ignore case sensitivity)."+
+       "<br/>To run the function,open your developer console to call the function RemoveDuplicatesFromArray(array). for E.g. console.log(([3, 1, 1, 4, 5, 4, 7, 8, 7, 3, 6,'a','a','b']));"
+    }
+}
+
+function getAgeFromDob()
+{
+  var dob = document.getElementById("txtDOB").value;
+  if (dob.length !== 10) { 
+     document.getElementById("txtDOB").value = "";
+    alert("Please enter D.O.B.");
+        return false; 
+    } 
+    // third and sixth character should be '/' 
+    if (dob.substring(2, 3) !== '/' || dob.substring(5, 6) !== '/') { 
+      document.getElementById("txtDOB").value = "";
+    alert("Please enter D.O.B. in dd/MM/yyyy format");
+        return false; 
+    } 
+    dtDob = new Date(dob.split('/')[2], dob.split('/')[1] * 1 , dob.split('/')[0]);dob;
+var year = dtDob.getFullYear();
+var month = dtDob.getMonth() - 1;
+var day = dtDob.getDate();
+var today = new Date();
+var age = today.getFullYear() - year;
+if (today.getMonth() < month || (today.getMonth() == month && today.getDate() < day)) {
+  age--;
+}
+if (age >=14 && age <=24)
+{
+  alert("User Age is : "+age + " \n User is eligible.");
+}
+else
+{
+  alert("User Age is : "+age + " \n User is not eligible.");
+}
+}
+
+function mergeSort (array) {
+      if (array.length === 1) {
+      return array; 
+                               
+   }
+   const middle = Math.floor(array.length / 2) 
+   const left = array.slice(0, middle)        
+   const right = array.slice(middle)    
+   
+   return merge(
+    mergeSort(left),
+    mergeSort(right)
+   )
+   }
+   function merge (left, right) {
+      let output = []
+      let leftIndex = 0
+      let rightIndex = 0
+      while (leftIndex < left.length && rightIndex < right.length) {
+         if (left[leftIndex] < right[rightIndex]) {
+          output.push(left[leftIndex])
+         leftIndex++
+                
+         } else {
+          output.push(right[rightIndex])
+         rightIndex++      
+      }
+   }
+   return output.concat(left.slice(leftIndex)).concat(right.slice(rightIndex))
+   }
+
+function gcd() {
+  
+  num1 = Math.abs(document.getElementById("txtNum1").value);
+  num2 = Math.abs(document.getElementById("txtNum2").value);
+  while(num2) {
+    var t = num2;
+    num2 = num1 % num2;
+    num1 = t;
+  }
+  document.getElementById("AnsDiv").innerHTML ="GCD of "+ document.getElementById("txtNum1").value
+        + " and " + document.getElementById("txtNum2").value
+        +" is : "+  num1.toString();
+}
+
+function GetNelementfromArray(array, n)
+{
+  if (array == null) 
+    return void 0;
+  if (n == null) 
+     return array[array.length - 1];
+  return array.slice(Math.max(array.length - n, 0));  
+}
+
+function RemoveDuplicatesFromArray(array) { 
+var resArr = [];
+array.forEach(function(i){
+  if(!(resArr.includes(i) || resArr.includes(i.toString().toLowerCase())))
+  resArr.push(i)
+});
+return resArr;
+}
+</script>
+</html>
